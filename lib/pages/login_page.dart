@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/home_page.dart';
+import 'package:flutter_application_1/DummyMahasiswa.dart';
+import 'package:flutter_application_1/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,10 +14,7 @@ class LoginPage extends StatefulWidget {
 TextEditingController username = TextEditingController();
 TextEditingController password = TextEditingController();
 
-var data = [
-  {'username': 'admin', 'password': 'admin'},
-  {'username': 'user', 'password': 'user'},
-];
+List<Mahasiswa> dataMahasiswa = getMahasiswa();
 
 class _LoginPageState extends State<LoginPage> {
   @override
@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'E-Learning UPNYK',
+              'Login Page',
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -65,12 +65,21 @@ class _LoginPageState extends State<LoginPage> {
             ),
             SizedBox(height: 20), // Tambahkan baris ini
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                primary: Colors.pink,
+              ),
               onPressed: () {
-                for (var i = 0; i < data.length; i++) {
-                  if (username.text == data[i]['username'] &&
-                      password.text == data[i]['password']) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => HomePage())));
+                for (var i = 0; i < dataMahasiswa.length; i++) {
+                  if (username.text == dataMahasiswa[i].username &&
+                      password.text == dataMahasiswa[i].password) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomePage(
+                          mahasiswa: dataMahasiswa[i],
+                        ),
+                      ),
+                    );
                     return;
                   }
                 }
@@ -78,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                 alignment: Alignment.center,
                 width: double.infinity,
-                child: Text("Masuk"),
+                child: Text("Login"),
               ),
             )
           ],
