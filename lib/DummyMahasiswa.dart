@@ -26,7 +26,7 @@ class Mahasiswa {
   String get password => _password;
 }
 
-void main() {
+List<Mahasiswa> getMahasiswa() {
   List<String> namaMahasiswa = [
     "Irma Wang",
     "Angela Nolan",
@@ -167,6 +167,8 @@ void main() {
     print("Semester Saat Ini: ${mahasiswa.semesterSaatIni}");
     print("-------------------------");
   });
+
+  return mahasiswas;
 }
 
 // Implement your username generation function
